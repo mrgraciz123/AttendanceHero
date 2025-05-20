@@ -4,9 +4,6 @@ Attendance Hero is a client-side web application designed to help students perso
 
 All data is stored locally in the user's web browser using `localStorage`, meaning no backend server is required and the application can work offline after the initial load. The interface is designed to be clean, responsive, and user-friendly.
 
-**Live Demo:** [https://[your-github-username].github.io/[your-repo-name]/](https://[your-github-username].github.io/[your-repo-name]/)
-*(Remember to replace with your actual GitHub Pages link after deployment)*
-
 ## Key Features:
 *   Add, edit, and delete courses.
 *   Log attendance per class session (date and time specific).
