@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A personal attendance tracker to help students manage their course attendance and meet requirements.">
+    <meta name="keywords" content="attendance, tracker, student, academic, courses, percentage">
+    <title>Attendance Hero - Track Your Success</title>
+
+    <!-- Favicon (replace with your own) -->
+    <link rel="icon" type="image/png" href="favicon.png"> <!-- Create a 32x32 or 16x16 favicon.png -->
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-user-check"></i>
+                <h1>Attendance Hero</h1>
+            </div>
+            <!-- Future navigation could go here -->
+        </header>
+
+        <main class="app-main">
+            <!-- Dashboard View -->
+            <section id="course-dashboard-view" class="view active-view">
+                <div class="view-header">
+                    <h2>My Courses</h2>
+                    <button id="show-add-course-modal-btn" class="btn btn-primary btn-with-icon">
+                        <i class="fas fa-plus-circle"></i> Add New Course
+                    </button>
+                </div>
+                <div id="course-list-container" class="course-grid">
+                    <!-- Courses will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Course Detail View -->
+            <section id="course-detail-view" class="view">
+                <div class="view-header">
+                    <button id="back-to-dashboard-btn" class="btn btn-secondary btn-with-icon">
+                        <i class="fas fa-arrow-left"></i> Dashboard
+                    </button>
+                    <h2 id="detail-course-name-title">Course Details</h2>
+                    <button id="edit-course-btn" class="btn btn-outline btn-with-icon" title="Edit this course">
+                        <i class="fas fa-edit"></i> Edit Course
+                    </button>
+                </div>
+                <div class="course-detail-content card-style">
+                    <div id="detail-stats-cards" class="stats-cards-container">
+                        <!-- Stats cards will be generated here -->
+                    </div>
+
+                    <div class="attendance-log-section">
+                        <h3>Log New Attendance</h3>
+                        <form id="log-attendance-form" class="form-styled">
+                            <input type="hidden" id="log-course-id-detail">
+                            <div class="form-group">
+                                <label for="attendance-date-detail">Date:</label>
+                                <input type="date" id="attendance-date-detail" required>
+                            </div>
+                            <!-- ADDED FOR TIME FEATURE -->
+                            <div class="form-group">
+                                <label for="attendance-time-detail">Class Start Time (HH:MM):</label>
+                                <input type="time" id="attendance-time-detail" required>
+                            </div>
+                            <!-- END OF ADDED SECTION -->
+                            <div class="form-group">
+                                <label for="attendance-status-detail">Status:</label>
+                                <select id="attendance-status-detail">
+                                    <option value="present">Present</option>
+                                    <option value="absent">Absent</option>
+                                    <option value="late">Late (counts as Present)</option>
+                                    <option value="canceled">Class Canceled (Excused)</option>
+                                    <option value="holiday">Holiday (Excused)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendance-notes-detail">Notes (Optional):</label>
+                                <input type="text" id="attendance-notes-detail" placeholder="e.g., Doctor's appointment">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-with-icon">
+                                <i class="fas fa-calendar-check"></i> Log Attendance
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="attendance-history-section">
+                        <h3>Attendance History</h3>
+                        <ul id="attendance-history-list-detail" class="history-list">
+                            <!-- Logged attendance entries -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Add/Edit Course Modal -->
+        <div id="course-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="course-modal-title">Add New Course</h2>
+                    <button id="close-course-modal-btn" class="close-modal-btn" aria-label="Close modal">×</button>
+                </div>
+                <form id="course-form-modal" class="form-styled">
+                    <input type="hidden" id="course-modal-id"> <!-- For editing -->
+                    <div class="form-group">
+                        <label for="course-name-modal">Course Name:</label>
+                        <input type="text" id="course-name-modal" placeholder="e.g., Calculus 101" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="total-classes-modal">Total Planned Classes (Optional):</label>
+                        <input type="number" id="total-classes-modal" min="0" placeholder="e.g., 30">
+                    </div>
+                    <div class="form-group">
+                        <label for="target-attendance-modal">Target Attendance %:</label>
+                        <input type="number" id="target-attendance-modal" value="75" min="1" max="100" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancel-course-modal-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" id="save-course-modal-btn" class="btn btn-primary btn-with-icon">
+                            <i class="fas fa-save"></i> Save Course
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Toast Notification Container -->
+        <div id="toast-container"></div>
+
+        <footer class="app-footer">
+            <p>© <span id="current-year"></span> Attendance Hero. Track with confidence!</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
